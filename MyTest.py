@@ -13,7 +13,7 @@ from langchain.llms import OpenAI
 from langchain.vectorstores import Chroma
 
 
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = ''
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # Enable to save to disk & reuse the model (for repeated queries on the same data)
