@@ -15,3 +15,9 @@
     pip install langchain
     pip install openai
     pip install unstructured 
+    pip install datasets
+    pip install cassio
+    pip install PyPDF2
+    pip install pycryptodome
+    pip install -U langchain chromadb
+    pip install -U langchain-openai

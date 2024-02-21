@@ -1,0 +1,1 @@
+G:\Projects\Python\myenvai\Scripts\activate.bat
