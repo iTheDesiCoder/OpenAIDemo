@@ -21,3 +21,4 @@
     pip install pycryptodome
     pip install -U langchain chromadb
     pip install -U langchain-openai
+    pip install faiss-cpu

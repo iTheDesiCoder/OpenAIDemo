@@ -37,7 +37,7 @@ else:
     #print(raw_text)
         
     # split it into chunks
-    text_splitter = CharacterTextSplitter(chunk_size=256, chunk_overlap=20,length_function = len)
+    text_splitter = CharacterTextSplitter(separator="\n",chunk_size=1000, chunk_overlap=100,length_function = len)
     texts = text_splitter.split_text(raw_text)
     if PERSIST:
         db = Chroma.from_texts(texts=texts, persist_directory=persist_directory, embedding=embedding)
@@ -45,14 +45,17 @@ else:
         db = Chroma.from_texts(texts=texts, embedding=embedding)
 
 # query it
-query = "Can you list funds which has lowest fees"
+query = "Can you explain about Any fund with alternative fund type available in this product?"
 
-answer = db.similarity_search(query, k=1)
+answers = db.similarity_search(query)
 
 
 
-system_message = "You are a helpful Annuity sales assistant who is always available to answer questions about the product to Financial Advisor. You are knowledgeable about the product and can answer questions about the product features, benefits, subaccounts, and how to use the product." 
-human_message = query + " " + answer[0].page_content
+system_message = "You are a helpful Annuity sales assistant who is always available to answer questions about the Annuity to Financial Advisor. You are knowledgeable about the annuity and can explain fees, expense, benfits and funds detail to financial advisor." 
+human_message = query + "  Answer from below content in table format if possible \n\r "
+for answer in answers:
+    human_message += answer.page_content
+
 messages = [ HumanMessage(content=human_message), SystemMessage(content=system_message) ]
 
 chat_response = chat.invoke(messages)
